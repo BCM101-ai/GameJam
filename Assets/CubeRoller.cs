@@ -1,14 +1,14 @@
 using UnityEngine;
 using System.Collections;
 
-
 public class CubeRoller : MonoBehaviour
 {
-    public float flipDuration = 0.2f; // Short animation
+    public float flipDuration = 0.2f;
     private bool isFlipping = false;
 
     void Update()
     {
+        if (!enabled) return; // Only move when script is enabled
         if (isFlipping) return;
 
         if (Input.GetKeyDown(KeyCode.W)) StartCoroutine(Flip(Vector3.forward));
