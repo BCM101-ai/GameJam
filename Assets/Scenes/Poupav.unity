@@ -826,8 +826,8 @@ GameObject:
   - component: {fileID: 500074557}
   - component: {fileID: 500074556}
   - component: {fileID: 500074555}
-  - component: {fileID: 500074554}
   - component: {fileID: 500074560}
+  - component: {fileID: 500074561}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -835,19 +835,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &500074554
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 500074553}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46273d7e23bf8e840a765aab7ebebcca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  flipDuration: 0.2
 --- !u!65 &500074555
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -964,6 +951,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
+--- !u!114 &500074561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500074553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9161f1d61a15324ea6629b9b05849d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flipDuration: 0.2
 --- !u!1 &624112335
 GameObject:
   m_ObjectHideFlags: 0
@@ -2396,6 +2396,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1440737841}
   - component: {fileID: 1440737840}
+  - component: {fileID: 1440737842}
   m_Layer: 0
   m_Name: DimensionManager
   m_TagString: Untagged
@@ -2415,11 +2416,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c49902250729d434bb4c71c5cf382049, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraFollow: {fileID: 5693546}
-  cameraTransform: {fileID: 5693544}
-  rotation3D: {x: 0.23911761, y: 0.36964384, z: -0.09904577, w: 0.8923991}
-  rotation2D: {x: 0, y: 0, z: 0, w: 1}
-  rotationDuration: 1
 --- !u!4 &1440737841
 Transform:
   m_ObjectHideFlags: 0
@@ -2436,6 +2432,23 @@ Transform:
   - {fileID: 5693544}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1440737842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1440737839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d43fc97e67269048bb736fafe00ee33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraFollow: {fileID: 5693546}
+  cameraTransform: {fileID: 5693544}
+  rotation3D: {x: 0.23911761, y: 0.36964384, z: -0.09904577, w: 0.8923991}
+  rotation2D: {x: 0, y: 0, z: 0, w: 1}
+  rotationDuration: 1
 --- !u!1 &1476642491
 GameObject:
   m_ObjectHideFlags: 0

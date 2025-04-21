@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - Climbable
+  - Block
+  - Obstacle
   layers:
   - Default
   - TransparentFX
@@ -11,15 +14,10 @@ TagManager:
   - Ground
   - Water
   - UI
-  - Dimension2D
-  - Dimension3D
-<<<<<<< Updated upstream
   - 
   - 
-=======
-  - Block
-  - PerspectiveGround
->>>>>>> Stashed changes
+  - 
+  - 
   - 
   - 
   - 
