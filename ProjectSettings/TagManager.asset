@@ -8,6 +8,9 @@ TagManager:
   - Block
   - Obstacle
   - Burn
+  - FxTemporaire
+  - 2DPlatform
+  - OutsideBeam
   layers:
   - Default
   - TransparentFX
@@ -18,9 +21,9 @@ TagManager:
   - Dimension2D
   - Dimension3D
   - Block
-  - 
-  - 
-  - 
+  - 2DPlatform
+  - BeamLayer
+  - platformLayerMask
   - 
   - 
   - 
