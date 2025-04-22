@@ -704,7 +704,9 @@ MonoBehaviour:
   flipDuration: 0.2
   obstacleMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
+  climbSearchRadius: 1.5
+  maxClimbHeight: 1.5
 --- !u!65 &199970766
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1791,6 +1793,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7146521406498821007, guid: 5aded402da06bb8479b05b047489c52f, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -7029948723529949830, guid: 5aded402da06bb8479b05b047489c52f, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: -4292154010595695564, guid: 5aded402da06bb8479b05b047489c52f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1814,6 +1824,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 5aded402da06bb8479b05b047489c52f, type: 3}
       propertyPath: m_Name
       value: Forest
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5aded402da06bb8479b05b047489c52f, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

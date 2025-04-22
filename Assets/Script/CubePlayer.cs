@@ -6,6 +6,8 @@ public class CubePlayer : MonoBehaviour
 {
     public float flipDuration = 0.2f;
     public LayerMask obstacleMask;
+    public float climbSearchRadius = 1.5f;  // how far we search around direction
+    public float maxClimbHeight = 1.5f;     // how high we can climb
 
     private bool isMoving = false;
     private bool is2DMode = false;
@@ -14,20 +16,18 @@ public class CubePlayer : MonoBehaviour
     {
         if (isMoving) return;
 
-        // Toggle mode
         if (Input.GetKeyDown(KeyCode.Space))
             is2DMode = !is2DMode;
 
-        // Input handling
         Vector3 direction = Vector3.zero;
         if (Input.GetKeyDown(KeyCode.W)) direction = Vector3.forward;
         if (Input.GetKeyDown(KeyCode.S)) direction = Vector3.back;
         if (Input.GetKeyDown(KeyCode.A)) direction = Vector3.left;
         if (Input.GetKeyDown(KeyCode.D)) direction = Vector3.right;
-        if (!is2DMode && Input.GetKeyDown(KeyCode.E)) direction = Vector3.up; // optional
+        if (!is2DMode && Input.GetKeyDown(KeyCode.E)) direction = Vector3.up;
 
         if (is2DMode && (direction == Vector3.forward || direction == Vector3.back))
-            return; // No depth movement in 2D
+            return;
 
         if (direction != Vector3.zero)
         {
@@ -38,22 +38,37 @@ public class CubePlayer : MonoBehaviour
     void TryMove(Vector3 dir)
     {
         Vector3 origin = transform.position;
-        Vector3 checkPos = origin + dir;
 
-        // Check if there's a cube in the direction (1 unit high)
-        if (Physics.Raycast(checkPos + Vector3.up * 2, Vector3.down, out RaycastHit hit, 2f, obstacleMask))
+        // Look for any climbable block around the intended direction
+        Collider[] hits = Physics.OverlapBox(origin + dir, Vector3.one * climbSearchRadius, Quaternion.identity, obstacleMask);
+
+        Collider nearest = null;
+        float nearestDistance = Mathf.Infinity;
+
+        foreach (var hit in hits)
         {
-            Vector3 targetPos = hit.collider.transform.position;
+            Vector3 hitPos = hit.transform.position;
+            float heightDiff = hitPos.y - origin.y;
 
-            // If the cube is 1 unit high (same level), flip onto it
-            if (Mathf.Abs(targetPos.y - origin.y) <= 1.1f)
+            if (heightDiff >= -0.1f && heightDiff <= maxClimbHeight)
             {
-                StartCoroutine(FlipMove(targetPos - origin));
+                float dist = Vector3.Distance(origin + dir, hitPos);
+                if (dist < nearestDistance)
+                {
+                    nearestDistance = dist;
+                    nearest = hit;
+                }
             }
+        }
+
+        if (nearest != null)
+        {
+            Vector3 moveDir = nearest.transform.position - origin;
+            StartCoroutine(FlipMove(moveDir));
         }
         else
         {
-            // No block — just move normally
+            // Just move normally if no block found
             StartCoroutine(FlipMove(dir));
         }
     }
@@ -74,7 +89,6 @@ public class CubePlayer : MonoBehaviour
             yield return null;
         }
 
-        // Snap
         transform.position = RoundVector(transform.position);
         transform.rotation = Quaternion.Euler(
             Mathf.Round(transform.eulerAngles.x / 90) * 90,
@@ -87,6 +101,6 @@ public class CubePlayer : MonoBehaviour
 
     Vector3 RoundVector(Vector3 v)
     {
-        return new Vector3(Mathf.Round(v.x), Mathf.Round(v.y), Mathf.Round(v.z));
+        return new Vector3(Mathf.Round(v.x * 10) / 10f, Mathf.Round(v.y * 10) / 10f, Mathf.Round(v.z * 10) / 10f);
     }
 }
