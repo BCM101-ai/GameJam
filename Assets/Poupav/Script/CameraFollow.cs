@@ -9,7 +9,7 @@ public class CameraFollow : MonoBehaviour
 
     public bool is2D = false;        // Are we in 2D mode?
 
-    void LateUpdate()
+    void Update()
     {
         if (target == null) return;
 

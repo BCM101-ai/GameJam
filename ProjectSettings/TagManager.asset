@@ -11,6 +11,7 @@ TagManager:
   - FxTemporaire
   - 2DPlatform
   - OutsideBeam
+  - Expandable
   layers:
   - Default
   - TransparentFX
