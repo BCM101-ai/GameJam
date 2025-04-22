@@ -9,6 +9,8 @@ TagManager:
   - Obstacle
   - Burn
   - FxTemporaire
+  - 2DPlatform
+  - OutsideBeam
   layers:
   - Default
   - TransparentFX
@@ -16,11 +18,11 @@ TagManager:
   - Ground
   - Water
   - UI
-  - Dimension2D
-  - Dimension3D
-  - Obstacle
-  - Camera
-  - Player
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
