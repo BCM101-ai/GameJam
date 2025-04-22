@@ -7,6 +7,12 @@ TagManager:
   - Climbable
   - Block
   - Obstacle
+<<<<<<< Updated upstream
+=======
+  - Burn
+  - FxTemporaire
+  - 2DPlatform
+>>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX
@@ -14,10 +20,17 @@ TagManager:
   - Ground
   - Water
   - UI
+<<<<<<< Updated upstream
   - 
   - 
   - 
   - 
+=======
+  - Dimension2D
+  - Dimension3D
+  - Block
+  - 2DPlatform
+>>>>>>> Stashed changes
   - 
   - 
   - 

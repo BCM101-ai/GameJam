@@ -8,6 +8,10 @@ public class CubeController : MonoBehaviour
     public float flipDuration = 0.2f;
     private bool isMoving = false;
     private bool is2DMode = false;
+    
+    public LayerMask platformLayer; // Assign this in Inspector (same as before)
+    
+
 
     void Update()
     {
@@ -15,7 +19,26 @@ public class CubeController : MonoBehaviour
 
         // Toggle mode
         if (Input.GetKeyDown(KeyCode.Space))
+        {
             is2DMode = !is2DMode;
+            if (is2DMode)
+            {PerformPlayerRaycastSnap();}
+            
+
+            if (is2DMode && dimensionManager.last2DPlatform != null)
+            {
+                // Snap to top of the detected platform
+                Transform platform = dimensionManager.last2DPlatform;
+                Vector3 newPosition = new Vector3(
+                    platform.position.x,
+                    platform.position.y + 0.5f, // Adjust this based on cube size
+                    platform.position.z
+                );
+
+                transform.position = RoundVector(newPosition);
+            }
+        }
+
 
         // Read input
         Vector3 direction = Vector3.zero;
@@ -59,6 +82,32 @@ public class CubeController : MonoBehaviour
 
         isMoving = false;
     }
+    void PerformPlayerRaycastSnap()
+    {
+        Vector3 rayOrigin = transform.position + new Vector3(0f, -0.1f, 0f); // A little below player
+        Vector3 rayDirection = Vector3.forward; // Shoot straight into Z axis
+
+        RaycastHit2D hit = Physics2D.Raycast(rayOrigin, rayDirection, 10f, platformLayer);
+
+        Debug.DrawRay(rayOrigin, rayDirection * 10f, Color.yellow, 2f);
+
+        if (hit.collider != null && hit.collider.CompareTag("2DPlatform"))
+        {
+            Vector3 topPosition = new Vector3(
+                hit.collider.bounds.center.x,
+                hit.collider.bounds.max.y,
+                transform.position.z
+            );
+
+            transform.position = RoundVector(topPosition);
+            Debug.Log("Snapped to front platform: " + hit.collider.name);
+        }
+        else
+        {
+            Debug.Log("No platform detected in front of player");
+        }
+    }
+    
 
     Vector3 RoundVector(Vector3 v)
     {
