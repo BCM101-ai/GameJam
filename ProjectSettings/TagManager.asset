@@ -8,6 +8,7 @@ TagManager:
   - Block
   - Obstacle
   - Burn
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX
@@ -17,9 +18,9 @@ TagManager:
   - UI
   - Dimension2D
   - Dimension3D
-  - Block
-  - 
-  - 
+  - Obstacle
+  - Camera
+  - Player
   - 
   - 
   - 

@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class CubeController : MonoBehaviour
 {
     public float flipDuration = 0.2f;
+    public LayerMask groundLayer; // Assign this in Inspector
     private bool isMoving = false;
     private bool is2DMode = false;
 
@@ -13,7 +13,7 @@ public class CubeController : MonoBehaviour
     {
         if (isMoving) return;
 
-        // Toggle mode
+        // Toggle between 2D and 3D mode
         if (Input.GetKeyDown(KeyCode.Space))
             is2DMode = !is2DMode;
 
@@ -23,23 +23,35 @@ public class CubeController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.S)) direction = Vector3.back;
         if (Input.GetKeyDown(KeyCode.A)) direction = Vector3.left;
         if (Input.GetKeyDown(KeyCode.D)) direction = Vector3.right;
-        if (!is2DMode && Input.GetKeyDown(KeyCode.E)) direction = Vector3.up; // 3D only
 
         // Ignore Z movement in 2D mode
         if (is2DMode && (direction == Vector3.forward || direction == Vector3.back))
             return;
 
         if (direction != Vector3.zero)
-            StartCoroutine(FlipMove(direction));
+        {
+            Vector3 frontCheck = transform.position + direction;
+
+            // Raycast to check if a cube exists in front of us
+            if (Physics.Raycast(frontCheck + Vector3.up * 0.5f, Vector3.down, out RaycastHit hit, 1f, groundLayer))
+            {
+                // Teleport on top of it
+                transform.position = hit.collider.transform.position + Vector3.up;
+                return; // stop here, don't flip
+            }
+
+            // Normal flip movement
+            StartCoroutine(FlipMove(transform.position + direction));
+        }
     }
 
-    IEnumerator FlipMove(Vector3 dir)
+    IEnumerator FlipMove(Vector3 targetPos)
     {
         isMoving = true;
 
-        // Determine rotation anchor point
-        Vector3 anchor = transform.position + (Vector3.down + dir) * 0.5f;
-        Vector3 axis = Vector3.Cross(Vector3.up, dir);
+        Vector3 direction = targetPos - transform.position;
+        Vector3 anchor = transform.position + (Vector3.down + direction.normalized) * 0.5f;
+        Vector3 axis = Vector3.Cross(Vector3.up, direction.normalized);
 
         float rotated = 0;
         while (rotated < 90)
@@ -50,8 +62,8 @@ public class CubeController : MonoBehaviour
             yield return null;
         }
 
-        // Snap position and rotation
-        transform.position = RoundVector(transform.position);
+        // Snap to clean grid
+        transform.position = RoundVector(targetPos);
         transform.rotation = Quaternion.Euler(
             Mathf.Round(transform.eulerAngles.x / 90) * 90,
             Mathf.Round(transform.eulerAngles.y / 90) * 90,
