@@ -6,14 +6,45 @@ public class CubePlayer : MonoBehaviour
 {
     public float flipDuration = 0.2f;
     public LayerMask obstacleMask;
-    public float climbSearchRadius = 1.5f;  // how far we search around direction
-    public float maxClimbHeight = 1.5f;     // how high we can climb
+    public float climbSearchRadius = 1.5f;
+    public float maxClimbHeight = 1.5f;
+
+    public AudioSource walkAudio;
+    public AudioSource fallAudio;
+    public float groundCheckDistance = 0.6f;
 
     private bool isMoving = false;
     private bool is2DMode = false;
+    private bool wasGrounded = true;
+    private bool isFalling = false;
 
     void Update()
     {
+        bool isGrounded = IsGrounded();
+
+        if (!isMoving)
+        {
+            if (!isGrounded && !isFalling)
+            {
+                // Started falling
+                isFalling = true;
+                if (fallAudio != null && !fallAudio.isPlaying)
+                    fallAudio.Play();
+            }
+            else if (isGrounded && isFalling)
+            {
+                // Landed
+                isFalling = false;
+                if (fallAudio != null && fallAudio.isPlaying)
+                    fallAudio.Stop();
+
+                if (walkAudio != null)
+                    walkAudio.Play();
+            }
+        }
+
+        wasGrounded = isGrounded;
+
         if (isMoving) return;
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -38,8 +69,6 @@ public class CubePlayer : MonoBehaviour
     void TryMove(Vector3 dir)
     {
         Vector3 origin = transform.position;
-
-        // Look for any climbable block around the intended direction
         Collider[] hits = Physics.OverlapBox(origin + dir, Vector3.one * climbSearchRadius, Quaternion.identity, obstacleMask);
 
         Collider nearest = null;
@@ -68,7 +97,6 @@ public class CubePlayer : MonoBehaviour
         }
         else
         {
-            // Just move normally if no block found
             StartCoroutine(FlipMove(dir));
         }
     }
@@ -76,6 +104,19 @@ public class CubePlayer : MonoBehaviour
     IEnumerator FlipMove(Vector3 dir)
     {
         isMoving = true;
+
+        // Stop falling audio if playing
+        if (fallAudio != null && fallAudio.isPlaying)
+        {
+            fallAudio.Stop();
+        }
+        isFalling = false;
+
+        // Play walk sound only if grounded
+        if (walkAudio != null && IsGrounded())
+        {
+            walkAudio.Play();
+        }
 
         Vector3 anchor = transform.position + (Vector3.down + dir.normalized) * 0.5f;
         Vector3 axis = Vector3.Cross(Vector3.up, dir.normalized);
@@ -101,6 +142,15 @@ public class CubePlayer : MonoBehaviour
 
     Vector3 RoundVector(Vector3 v)
     {
-        return new Vector3(Mathf.Round(v.x * 10) / 10f, Mathf.Round(v.y * 10) / 10f, Mathf.Round(v.z * 10) / 10f);
+        return new Vector3(
+            Mathf.Round(v.x * 10) / 10f,
+            Mathf.Round(v.y * 10) / 10f,
+            Mathf.Round(v.z * 10) / 10f
+        );
+    }
+
+    bool IsGrounded()
+    {
+        return Physics.Raycast(transform.position, Vector3.down, groundCheckDistance + 0.1f);
     }
 }
