@@ -283,7 +283,7 @@ MonoBehaviour:
   currentViewIndex: 0
   smoothSpeed: 5
   directionIndex: 0
-  smoothTime: 0.2
+  smoothTime: 5
   is2D: 0
   offset2D: {x: 0, y: 0, z: 0}
 --- !u!1001 &7053826
