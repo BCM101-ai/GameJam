@@ -6,6 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Khawoat/Main menu.unity
+    guid: 305c3e2e8ab0eb34fa789b39c0611d28
+  - enabled: 1
+    path: Assets/Scenes/Da.unity
+    guid: aece194f701617d4ca1f0a037d31f87b
+  - enabled: 1
+    path: Assets/Scenes/Poupav.unity
+    guid: 5b876b8ba8831214fb6fe0c0246498b5
+  - enabled: 0
     path: Assets/Scenes/GameScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   m_configObjects:

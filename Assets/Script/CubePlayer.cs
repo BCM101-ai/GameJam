@@ -128,10 +128,10 @@ public class CubePlayer : MonoBehaviour
             {
                 direction = viewIndex switch
                 {
-                    0 => Vector3.right,
-                    1 => Vector3.forward,
-                    2 => Vector3.left,
-                    3 => Vector3.back,
+                    0 => Vector3.left,
+                    1 => Vector3.back,
+                    2 => Vector3.right,
+                    3 => Vector3.forward,
                     _ => Vector3.zero
                 };
             }
@@ -140,10 +140,10 @@ public class CubePlayer : MonoBehaviour
             {
                 direction = viewIndex switch
                 {
-                    0 => Vector3.left,
-                    1 => Vector3.back,
-                    2 => Vector3.right,
-                    3 => Vector3.forward,
+                    0 => Vector3.right,
+                    1 => Vector3.forward,
+                    2 => Vector3.left,
+                    3 => Vector3.back,
                     _ => Vector3.zero
                 };
             }

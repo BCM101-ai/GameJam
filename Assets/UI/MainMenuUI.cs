@@ -5,34 +5,36 @@ public class MainMenuUI : MonoBehaviour
 {
     [Header("Assign in Inspector")]
     public GameObject settingsPanel;
-    public string sceneToLoad; // 👈 Scene name to load (set from Inspector)
 
+    // Start game and load Level_1 scene
     public void StartGame()
     {
-        if (!string.IsNullOrEmpty(sceneToLoad))
-        {
-            SceneManager.LoadScene(sceneToLoad);
-        }
-        else
-        {
-            Debug.LogWarning("Scene name is empty! Assign a scene name in the inspector.");
-        }
+        SceneManager.LoadScene("Level_1");
     }
 
+    // Show settings panel
     public void OpenSettings()
     {
         if (settingsPanel != null)
+        {
             settingsPanel.SetActive(true);
+        }
         else
+        {
             Debug.LogWarning("Settings Panel not assigned!");
+        }
     }
 
+    // Hide settings panel
     public void CloseSettings()
     {
         if (settingsPanel != null)
+        {
             settingsPanel.SetActive(false);
+        }
     }
 
+    // Quit the game
     public void QuitGame()
     {
         Debug.Log("Quit button clicked");
