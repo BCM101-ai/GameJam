@@ -8,6 +8,9 @@ public class CubePlayer : MonoBehaviour
     public LayerMask obstacleMask;
     public float climbSearchRadius = 1.5f;  // how far we search around direction
     public float maxClimbHeight = 1.5f;     // how high we can climb
+    public Transform cameraTransform;  // Drag the camera here in the inspector
+    public CameraFollow cameraFollow;
+
 
     private bool isMoving = false;
     private bool is2DMode = false;
@@ -18,12 +21,15 @@ public class CubePlayer : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
             is2DMode = !is2DMode;
+        
+        Vector3 input = Vector3.zero;
+        if (Input.GetKeyDown(KeyCode.W)) input = Vector3.forward;
+        if (Input.GetKeyDown(KeyCode.S)) input = Vector3.back;
+        if (Input.GetKeyDown(KeyCode.A)) input = Vector3.left;
+        if (Input.GetKeyDown(KeyCode.D)) input = Vector3.right;
 
-        Vector3 direction = Vector3.zero;
-        if (Input.GetKeyDown(KeyCode.W)) direction = Vector3.forward;
-        if (Input.GetKeyDown(KeyCode.S)) direction = Vector3.back;
-        if (Input.GetKeyDown(KeyCode.A)) direction = Vector3.left;
-        if (Input.GetKeyDown(KeyCode.D)) direction = Vector3.right;
+        Vector3 direction = RotateInput(input, cameraFollow.directionIndex);
+
         if (!is2DMode && Input.GetKeyDown(KeyCode.E)) direction = Vector3.up;
 
         if (is2DMode && (direction == Vector3.forward || direction == Vector3.back))
@@ -33,6 +39,18 @@ public class CubePlayer : MonoBehaviour
         {
             TryMove(direction);
         }
+        Vector3 RotateInput(Vector3 input, int index)
+        {
+            switch (index % 4)
+            {
+                case 0: return input;                              // Behind (default)
+                case 1: return new Vector3(-input.z, 0, input.x);  // Left of player
+                case 2: return new Vector3(-input.x, 0, -input.z); // In front of player
+                case 3: return new Vector3(input.z, 0, -input.x);  // Right of player
+                default: return input;
+            }
+        }
+
     }
 
     void TryMove(Vector3 dir)
