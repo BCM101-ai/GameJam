@@ -518,9 +518,7 @@ MonoBehaviour:
   riseSpeed: 0.5
   player: {fileID: 786316168}
   maxVolumeDistance: 10
-  waterHeight: 5
   ambientWaterSound: {fileID: 8300000, guid: 0733f5480d45f914eaeb07bf93a61810, type: 3}
-  drownSound: {fileID: 8300000, guid: 706b139474fb0b24ba0d0787b4577752, type: 3}
 --- !u!82 &258909558
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2000,8 +1998,8 @@ GameObject:
   - component: {fileID: 1142355063}
   - component: {fileID: 1142355062}
   - component: {fileID: 1142355061}
-  - component: {fileID: 1142355060}
   - component: {fileID: 1142355065}
+  - component: {fileID: 1142355066}
   m_Layer: 0
   m_Name: Cube (3)
   m_TagString: Burn
@@ -2009,22 +2007,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1142355060
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1142355059}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2585604c63cbd4245a09bb385b7eafcc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  burnEffectPrefab: {fileID: 8172849020266659018, guid: 2af5562ce69fc2d448481a1587a352a5, type: 3}
-  burnDelay: 1
-  effectLifetime: 3
-  burnSound: {fileID: 8300000, guid: 98879478b7779ca4d9b360babe6caf4c, type: 3}
 --- !u!65 &1142355061
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2142,6 +2124,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 122
   m_CollisionDetection: 0
+--- !u!114 &1142355066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1142355059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bc735ba2c6b8dc47a985e01145d081a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delayBeforeDestroy: 1
 --- !u!1 &1148369551
 GameObject:
   m_ObjectHideFlags: 0
