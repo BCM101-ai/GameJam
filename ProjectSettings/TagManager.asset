@@ -8,9 +8,6 @@ TagManager:
   - Block
   - Obstacle
   - Burn
-  - FxTemporaire
-  - 2DPlatform
-  - OutsideBeam
   - Expandable
   layers:
   - Default

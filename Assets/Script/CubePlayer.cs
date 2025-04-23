@@ -8,19 +8,18 @@ public class CubePlayer : MonoBehaviour
     public LayerMask obstacleMask;
     public float climbSearchRadius = 1.5f;
     public float maxClimbHeight = 1.5f;
-    public CameraFollow cameraFollow;
-
 
     public AudioSource walkAudio;
     public AudioSource fallAudio;
     public float groundCheckDistance = 0.6f;
+
+    public CameraFollow cameraFollow;
 
     private bool isMoving = false;
     private bool is2DMode = false;
     private bool wasGrounded = true;
     private bool isFalling = false;
 
-    
     void Start()
     {
         if (cameraFollow == null)
@@ -75,7 +74,6 @@ public class CubePlayer : MonoBehaviour
                 }
             }
 
-            // Default to forward
             if (Input.GetKeyDown(KeyCode.W))
             {
                 direction = closest switch
@@ -87,7 +85,6 @@ public class CubePlayer : MonoBehaviour
                     _ => Vector3.zero
                 };
             }
-
             if (Input.GetKeyDown(KeyCode.S))
             {
                 direction = closest switch
@@ -99,7 +96,6 @@ public class CubePlayer : MonoBehaviour
                     _ => Vector3.zero
                 };
             }
-
             if (Input.GetKeyDown(KeyCode.A))
             {
                 direction = closest switch
@@ -111,7 +107,6 @@ public class CubePlayer : MonoBehaviour
                     _ => Vector3.zero
                 };
             }
-
             if (Input.GetKeyDown(KeyCode.D))
             {
                 direction = closest switch
@@ -123,14 +118,13 @@ public class CubePlayer : MonoBehaviour
                     _ => Vector3.zero
                 };
             }
-
             if (Input.GetKeyDown(KeyCode.E)) direction = Vector3.up;
         }
-        else if (is2DMode && cameraFollow != null)
+        if (is2DMode && cameraFollow != null)
         {
             int viewIndex = cameraFollow.currentViewIndex;
 
-            if (Input.GetKeyDown(KeyCode.A)) // LEFT
+            if (Input.GetKeyDown(KeyCode.A))
             {
                 direction = viewIndex switch
                 {
@@ -142,7 +136,7 @@ public class CubePlayer : MonoBehaviour
                 };
             }
 
-            if (Input.GetKeyDown(KeyCode.D)) // RIGHT
+            if (Input.GetKeyDown(KeyCode.D))
             {
                 direction = viewIndex switch
                 {
@@ -156,15 +150,11 @@ public class CubePlayer : MonoBehaviour
         }
 
 
-    
-
         if (direction != Vector3.zero)
         {
             TryMove(direction.normalized);
         }
-        
     }
-
 
     void TryMove(Vector3 dir)
     {
@@ -205,14 +195,12 @@ public class CubePlayer : MonoBehaviour
     {
         isMoving = true;
 
-        // Stop falling audio if playing
         if (fallAudio != null && fallAudio.isPlaying)
         {
             fallAudio.Stop();
         }
         isFalling = false;
 
-        // Play walk sound only if grounded
         if (walkAudio != null && IsGrounded())
         {
             walkAudio.Play();
