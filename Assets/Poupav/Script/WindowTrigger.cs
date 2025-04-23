@@ -7,12 +7,21 @@ public class WindowTrigger : MonoBehaviour
     public Transform teleportTarget;          
     public float smoothDuration = 0.1f;       
 
-    public DimensionManager dimensionManager;  // 👈 Drag this in Inspector
+    public DimensionManager dimensionManager; // 👈 Drag in from Inspector
+    [Range(0, 3)] public int requiredViewIndex = 0; // 👈 Set this per trigger
 
     void OnTriggerEnter(Collider other)
     {
-        // ✅ Only teleport if in 2D mode and has teleport target
-        if (other.transform == player && teleportTarget != null && dimensionManager.is2D)
+        // ✅ Only trigger if:
+        // 1. It’s the player
+        // 2. A teleport target exists
+        // 3. We're in 2D mode
+        // 4. The camera is currently on the correct view
+        if (other.transform == player 
+            && teleportTarget != null 
+            && dimensionManager != null 
+            && dimensionManager.is2D 
+            && dimensionManager.cameraFollow.currentViewIndex == requiredViewIndex)
         {
             StartCoroutine(SmoothTeleport(teleportTarget.position));
         }

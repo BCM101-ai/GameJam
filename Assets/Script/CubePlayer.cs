@@ -8,6 +8,8 @@ public class CubePlayer : MonoBehaviour
     public LayerMask obstacleMask;
     public float climbSearchRadius = 1.5f;
     public float maxClimbHeight = 1.5f;
+    public CameraFollow cameraFollow;
+
 
     public AudioSource walkAudio;
     public AudioSource fallAudio;
@@ -18,6 +20,13 @@ public class CubePlayer : MonoBehaviour
     private bool wasGrounded = true;
     private bool isFalling = false;
 
+    
+    void Start()
+    {
+        if (cameraFollow == null)
+            cameraFollow = FindObjectOfType<CameraFollow>();
+    }
+
     void Update()
     {
         bool isGrounded = IsGrounded();
@@ -26,18 +35,15 @@ public class CubePlayer : MonoBehaviour
         {
             if (!isGrounded && !isFalling)
             {
-                // Started falling
                 isFalling = true;
                 if (fallAudio != null && !fallAudio.isPlaying)
                     fallAudio.Play();
             }
             else if (isGrounded && isFalling)
             {
-                // Landed
                 isFalling = false;
                 if (fallAudio != null && fallAudio.isPlaying)
                     fallAudio.Stop();
-
                 if (walkAudio != null)
                     walkAudio.Play();
             }
@@ -51,20 +57,114 @@ public class CubePlayer : MonoBehaviour
             is2DMode = !is2DMode;
 
         Vector3 direction = Vector3.zero;
-        if (Input.GetKeyDown(KeyCode.W)) direction = Vector3.forward;
-        if (Input.GetKeyDown(KeyCode.S)) direction = Vector3.back;
-        if (Input.GetKeyDown(KeyCode.A)) direction = Vector3.left;
-        if (Input.GetKeyDown(KeyCode.D)) direction = Vector3.right;
-        if (!is2DMode && Input.GetKeyDown(KeyCode.E)) direction = Vector3.up;
 
-        if (is2DMode && (direction == Vector3.forward || direction == Vector3.back))
-            return;
+        if (!is2DMode)
+        {
+            float yRot = Camera.main.transform.eulerAngles.y;
+            float closest = 0f;
+            float[] angles = { 45f, 135f, 225f, 315f };
+            float minDiff = 999f;
+
+            foreach (float angle in angles)
+            {
+                float diff = Mathf.Abs(Mathf.DeltaAngle(yRot, angle));
+                if (diff < minDiff)
+                {
+                    minDiff = diff;
+                    closest = angle;
+                }
+            }
+
+            // Default to forward
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                direction = closest switch
+                {
+                    45f => Vector3.right,
+                    135f => Vector3.back,
+                    225f => Vector3.left,
+                    315f => Vector3.forward,
+                    _ => Vector3.zero
+                };
+            }
+
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                direction = closest switch
+                {
+                    45f => Vector3.left,
+                    135f => Vector3.forward,
+                    225f => Vector3.right,
+                    315f => Vector3.back,
+                    _ => Vector3.zero
+                };
+            }
+
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                direction = closest switch
+                {
+                    45f => Vector3.forward,
+                    135f => Vector3.right,
+                    225f => Vector3.back,
+                    315f => Vector3.left,
+                    _ => Vector3.zero
+                };
+            }
+
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                direction = closest switch
+                {
+                    45f => Vector3.back,
+                    135f => Vector3.left,
+                    225f => Vector3.forward,
+                    315f => Vector3.right,
+                    _ => Vector3.zero
+                };
+            }
+
+            if (Input.GetKeyDown(KeyCode.E)) direction = Vector3.up;
+        }
+        else if (is2DMode && cameraFollow != null)
+        {
+            int viewIndex = cameraFollow.currentViewIndex;
+
+            if (Input.GetKeyDown(KeyCode.A)) // LEFT
+            {
+                direction = viewIndex switch
+                {
+                    0 => Vector3.left,
+                    1 => Vector3.back,
+                    2 => Vector3.right,
+                    3 => Vector3.forward,
+                    _ => Vector3.zero
+                };
+            }
+
+            if (Input.GetKeyDown(KeyCode.D)) // RIGHT
+            {
+                direction = viewIndex switch
+                {
+                    0 => Vector3.right,
+                    1 => Vector3.forward,
+                    2 => Vector3.left,
+                    3 => Vector3.back,
+                    _ => Vector3.zero
+                };
+            }
+        }
+
+
+    
 
         if (direction != Vector3.zero)
         {
-            TryMove(direction);
+            TryMove(direction.normalized);
         }
+        
     }
+
 
     void TryMove(Vector3 dir)
     {
