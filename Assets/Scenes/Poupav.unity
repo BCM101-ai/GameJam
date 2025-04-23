@@ -8372,7 +8372,7 @@ MonoBehaviour:
   mainCamera: {fileID: 1374185021}
   rotation3D: {x: 0.23911761, y: 0.36964384, z: -0.09904577, w: 0.8923991}
   rotation2D: {x: 0.70710677, y: 0, z: 0, w: 0.70710677}
-  rotationDuration: 0.2
+  rotationDuration: 0.1
   is2D: 0
   offset2D: {x: 0, y: 0, z: 0}
   isRotating: 0
@@ -13955,7 +13955,7 @@ MonoBehaviour:
   - {x: 0, y: 0, z: -8}
   - {x: 8, y: 0, z: 0}
   currentViewIndex: 0
-  smoothTime: 0.2
+  smoothTime: 0.1
   is2D: 0
 --- !u!1 &1382876161 stripped
 GameObject:
