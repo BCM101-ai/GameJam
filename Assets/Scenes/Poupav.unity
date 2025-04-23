@@ -1992,6 +1992,7 @@ MonoBehaviour:
   teleportTarget: {fileID: 293609125}
   smoothDuration: 0.2
   dimensionManager: {fileID: 1440737840}
+  requiredViewIndex: 0
 --- !u!65 &191641353
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4921,6 +4922,7 @@ MonoBehaviour:
   teleportTarget: {fileID: 179981160}
   smoothDuration: 0.1
   dimensionManager: {fileID: 1440737840}
+  requiredViewIndex: 0
 --- !u!65 &503300926
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6128,8 +6130,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 199970769}
   teleportTarget: {fileID: 179981160}
-  smoothDuration: 0.1
+  smoothDuration: 0.2
   dimensionManager: {fileID: 1440737840}
+  requiredViewIndex: 0
 --- !u!65 &603318501
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8596,6 +8599,7 @@ MonoBehaviour:
   teleportTarget: {fileID: 565654969}
   smoothDuration: 0.2
   dimensionManager: {fileID: 1440737840}
+  requiredViewIndex: 0
 --- !u!65 &854246011
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9187,6 +9191,7 @@ MonoBehaviour:
   teleportTarget: {fileID: 179981160}
   smoothDuration: 0.1
   dimensionManager: {fileID: 1440737840}
+  requiredViewIndex: 0
 --- !u!65 &902747284
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13846,6 +13851,7 @@ MonoBehaviour:
   teleportTarget: {fileID: 565654969}
   smoothDuration: 0.2
   dimensionManager: {fileID: 1440737840}
+  requiredViewIndex: 0
 --- !u!65 &1505542905
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14755,6 +14761,7 @@ MonoBehaviour:
   teleportTarget: {fileID: 293609125}
   smoothDuration: 0.2
   dimensionManager: {fileID: 1440737840}
+  requiredViewIndex: 0
 --- !u!65 &1635371746
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16823,6 +16830,7 @@ MonoBehaviour:
   teleportTarget: {fileID: 293609125}
   smoothDuration: 0.2
   dimensionManager: {fileID: 1440737840}
+  requiredViewIndex: 0
 --- !u!65 &1807352945
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19286,6 +19294,7 @@ MonoBehaviour:
   teleportTarget: {fileID: 179981160}
   smoothDuration: 0.1
   dimensionManager: {fileID: 1440737840}
+  requiredViewIndex: 0
 --- !u!65 &2076997250
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19443,6 +19452,7 @@ MonoBehaviour:
   teleportTarget: {fileID: 565654969}
   smoothDuration: 0.2
   dimensionManager: {fileID: 1440737840}
+  requiredViewIndex: 0
 --- !u!65 &2097993152
 BoxCollider:
   m_ObjectHideFlags: 0
