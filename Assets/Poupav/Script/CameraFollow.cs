@@ -6,15 +6,13 @@ public class CameraFollow : MonoBehaviour
     public Vector3[] cameraOffsets3D;
     public Vector3[] cameraOffsets2D;
     public int currentViewIndex = 0;
-    public float smoothSpeed = 5f;
-    public int directionIndex = 0; // 0 = behind, 1 = left, 2 = front, 3 = right
+    public float smoothTime = 0.3f;
+
     private Vector3 velocity = Vector3.zero;
-    public float smoothTime = 0.3f; // adjust this in Inspector
+    private Vector3 lookVelocity = Vector3.zero;
     public bool is2D = false;
-    public Vector3 offset2D;
 
-
-
+    private Vector3 lookTarget;
 
     void LateUpdate()
     {
@@ -23,13 +21,13 @@ public class CameraFollow : MonoBehaviour
         Vector3 offset = is2D ? cameraOffsets2D[currentViewIndex] : cameraOffsets3D[currentViewIndex];
         Vector3 desiredPosition = target.position + offset;
 
-        transform.position = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed * Time.deltaTime);
+        // Smooth camera position
+        transform.position = Vector3.SmoothDamp(transform.position, desiredPosition, ref velocity, smoothTime);
 
-        transform.LookAt(target);
+        // Smooth look-at target (prevents jitter from flip movement)
+        lookTarget = Vector3.SmoothDamp(lookTarget, target.position, ref lookVelocity, smoothTime);
+        transform.LookAt(lookTarget);
     }
-
-
-
 
     public void SetViewIndex(int index)
     {
@@ -39,5 +37,4 @@ public class CameraFollow : MonoBehaviour
             currentViewIndex = index;
         }
     }
-
 }

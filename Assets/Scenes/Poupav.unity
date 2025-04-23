@@ -281,11 +281,8 @@ MonoBehaviour:
   - {x: 0, y: 0, z: 8}
   - {x: -8, y: 0, z: 0}
   currentViewIndex: 0
-  smoothSpeed: 5
-  directionIndex: 0
-  smoothTime: 5
+  smoothTime: 0.2
   is2D: 0
-  offset2D: {x: 0, y: 0, z: 0}
 --- !u!1001 &7053826
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2379,8 +2376,10 @@ MonoBehaviour:
     m_Bits: 0
   climbSearchRadius: 1.5
   maxClimbHeight: 1.5
-  cameraTransform: {fileID: 5693544}
-  cameraFollow: {fileID: 5693546}
+  cameraFollow: {fileID: 0}
+  walkAudio: {fileID: 0}
+  fallAudio: {fileID: 0}
+  groundCheckDistance: 0.6
 --- !u!65 &199970766
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13340,7 +13339,7 @@ MonoBehaviour:
   mainCamera: {fileID: 5693543}
   rotation3D: {x: 0.23911761, y: 0.36964384, z: -0.09904577, w: 0.8923991}
   rotation2D: {x: 0, y: 0, z: 0, w: 1}
-  rotationDuration: 1
+  rotationDuration: 0.5
   is2D: 0
   offset2D: {x: 0, y: 0, z: 0}
   isRotating: 0
