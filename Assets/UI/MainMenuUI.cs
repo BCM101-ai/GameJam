@@ -9,7 +9,7 @@ public class MainMenuUI : MonoBehaviour
     // Start game and load Level_1 scene
     public void StartGame()
     {
-        SceneManager.LoadScene("Da");
+        SceneManager.LoadScene("Level_1");
     }
 
     // Show settings panel
