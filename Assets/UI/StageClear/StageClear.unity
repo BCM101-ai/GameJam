@@ -717,9 +717,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef6b671610cbf884596b48ebea95753e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  whiteOverlay: {fileID: 491091564}
   stageClearPanel: {fileID: 308360174}
-  fadeDuration: 1.5
 --- !u!1 &1286441452
 GameObject:
   m_ObjectHideFlags: 0
