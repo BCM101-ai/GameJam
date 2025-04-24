@@ -14,9 +14,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Poupav.unity
     guid: 5b876b8ba8831214fb6fe0c0246498b5
-  - enabled: 0
-    path: Assets/Scenes/GameScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/UI/StageClear/StageClear.unity
+    guid: 3d4ef41fca375634782876e8dd57accc
+  - enabled: 1
+    path: Assets/UI/GameOver/GameOver.unity
+    guid: 11a5c1a4b79eff1449b7c1e6d6b0f01e
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
