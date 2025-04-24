@@ -33,7 +33,7 @@ public class WaterBreatheManager : MonoBehaviour
             if (bubbleIndex >= bubbles.Length && !isDrowning)
             {
                 isDrowning = true;
-                SceneManager.LoadScene("Die"); // Replace with your death scene name
+                SceneManager.LoadScene("GameOver"); // Replace with your death scene name
             }
         }
         else

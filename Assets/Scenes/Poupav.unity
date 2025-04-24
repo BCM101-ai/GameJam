@@ -3084,7 +3084,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   riseSpeed: 0.05
-  player: {fileID: 0}
+  player: {fileID: 1928050039}
   maxVolumeDistance: 10
   ambientWaterSound: {fileID: 0}
 --- !u!82 &355486602
