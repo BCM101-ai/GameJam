@@ -1946,7 +1946,7 @@ GameObject:
   - component: {fileID: 258909557}
   m_Layer: 0
   m_Name: Cube (4)
-  m_TagString: Untagged
+  m_TagString: Water
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12562,8 +12562,34 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6055557889130316643, guid: 52156852a730bd946ba43a6319dc9ca9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3057573290125249478}
   m_SourcePrefab: {fileID: 100100000, guid: 52156852a730bd946ba43a6319dc9ca9, type: 3}
+--- !u!1 &3057573290125249477 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6055557889130316643, guid: 52156852a730bd946ba43a6319dc9ca9, type: 3}
+  m_PrefabInstance: {fileID: 3057573290125249476}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3057573290125249478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3057573290125249477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98d38b55848549541b985ce56744a2ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bubbles:
+  - {fileID: 1870323966}
+  - {fileID: 947996914}
+  - {fileID: 968338834}
+  blueBubbleSprite: {fileID: 0}
+  bubbleFillDelay: 1.5
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

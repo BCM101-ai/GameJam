@@ -218,7 +218,9 @@ public class CubePlayer : MonoBehaviour
             yield return null;
         }
 
+        yield return null; // Wait one frame before snapping
         transform.position = RoundVector(transform.position);
+
         transform.rotation = Quaternion.Euler(
             Mathf.Round(transform.eulerAngles.x / 90) * 90,
             Mathf.Round(transform.eulerAngles.y / 90) * 90,
@@ -231,11 +233,12 @@ public class CubePlayer : MonoBehaviour
     Vector3 RoundVector(Vector3 v)
     {
         return new Vector3(
-            Mathf.Round(v.x * 10) / 10f,
-            Mathf.Round(v.y * 10) / 10f,
-            Mathf.Round(v.z * 10) / 10f
+            Mathf.Round(v.x),
+            Mathf.Round(v.y),
+            Mathf.Round(v.z)
         );
     }
+
 
     bool IsGrounded()
     {
